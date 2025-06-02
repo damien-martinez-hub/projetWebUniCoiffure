@@ -82,14 +82,14 @@
                   <a class="nav-link active" aria-current="page" href="#">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Présentation</a>
+                  <a class="nav-link" href="projetinfo.php">Présentation</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Nos coiffures</a>
+                  <a class="nav-link" href="type_coiffure.php">Nos coiffures</a>
                  
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link" href="#">Nous contacter</a>
+                  <a class="nav-link" href="contact.php">Nous contacter</a>
                   
                 </li>
       
@@ -165,10 +165,8 @@ include 'server/connexion_server.php'; ?>
        <div class="footer-col">
          <h4>follow us</h4>
          <div class="social-links">
-           <a href="#"><i class="fab fa-facebook-f"></i></a>
-           <a href="#"><i class="fab fa-twitter"></i></a>
-           <a href="#"><i class="fab fa-instagram"></i></a>
-           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          
+           <a href="https://www.facebook.com/events/969006941136906/?active_tab=about" style="width:80px;color:white;background-color:black">Facebook<i class="bi bi-facebook"></i></a>
          </div>
        </div>
      </div>

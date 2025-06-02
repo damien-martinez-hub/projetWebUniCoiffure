@@ -1,14 +1,15 @@
 <?php 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $content = $_POST['content'];
+    $file = 'data.txt';
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['button'];
-    
-    echo "<p>Bonjour, $name !</p>";
-    $count_global=5;
-    echo json_encode($count_global); 
+    if (file_put_contents($file, $content)) {
+        echo 'File written successfully';
+    } else {
+        echo 'Error writing file';
     }
+}
 
   
   

@@ -78,19 +78,19 @@ if(!session_id()){
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Présentation</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Nos coiffures</a>
-               
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="#">Nous contacter</a>
-                
-              </li>
+            <a class="nav-link active" aria-current="page" href="projetinfo.php">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="projetinfo.php">Présentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="type_coiffure.php">Nos coiffures</a>
+           
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="contact.php">Nous contacter</a>
+            
+          </li>
     
     
             </ul>
@@ -123,6 +123,9 @@ if(!session_id()){
 </div>
 
 
+ <?php
+    echo '<input type="hidden" id="sessionUsername" value="' . $_SESSION['prenom'] . '">';
+  ?>
 </div>
 <div>
 <footer class="footer">
@@ -147,19 +150,14 @@ if(!session_id()){
        <div class="footer-col">
          <h4>follow us</h4>
          <div class="social-links">
-           <a href="#"><i class="fab fa-facebook-f"></i></a>
-           <a href="#"><i class="fab fa-twitter"></i></a>
-           <a href="#"><i class="fab fa-instagram"></i></a>
-           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          
+           <a href="https://www.facebook.com/events/969006941136906/?active_tab=about" style="width:80px;color:white;background-color:black">Facebook<i class="bi bi-facebook"></i></a>
          </div>
        </div>
      </div>
     </div>
  </footer>
 
- <?php
-    echo '<input type="hidden" id="sessionUsername" value="' . $_SESSION['prenom'] . '">';
-  ?>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery.js"></script>

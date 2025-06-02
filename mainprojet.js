@@ -4,7 +4,6 @@
 (function($) {
 	var sessionUsername = document.getElementById('sessionUsername').value;
 	console.log(sessionUsername);
-	
 	//FUNCTIONS
 	function Slider(nav_zone, content_zone,text_zone) {
 		this.nav = nav_zone;
@@ -55,84 +54,7 @@
 	//$newdiv1.classList.add("b1");
 	//$newdiv1.classList.add("position-absolute");
 
-	var tab_c=["<li><a class='nav-link' href='prevoir_rdv.php'>Prendre un rendez-vous téléphonique</a></li>","<li><a class='nav-link' href='contact.html'>Contact</a></li>"];
-	var $tab_c="<div class='b1 position-absolute'><ol>";
 	
-	tab_c.forEach((num, index, arr) => {
-		$tab_c=$tab_c+arr[index];
-		
-	  });
-	  $tab_c=$tab_c+"</ol></div>";
-	  $("a.nav-brand.c").append($($tab_c));
-	  
-
-	  /// TAB B ///
-	  var tab_b=["<li><a class='nav-link' href='type_coiffure.html'>Nos Types de coiffure</a></li>","<li><a class='nav-link' href='contact.html'>Nos Tarifs</a></li>"];
-	var $tab_b="<div class='b1 position-absolute'><ol>";
-	
-	tab_b.forEach((num, index, arr) => {
-		$tab_b=$tab_b+arr[index];
-		
-	  });
-	  $tab_b=$tab_b+"</ol></div>";
-	  $("a.nav-brand.b").append($($tab_b));
-	  
-
-	  /// TAB C ///
-	  var tab_d=["<li><a class='nav-link' href='inscrire.php'>S'inscrire</a></li>","<li><a class='nav-link' href='connecter.php'>Se connecter</a></li>","<li><a class='nav-link' href='deconnecter.php'>Se déconnecter</a></li>"];
-	var $tab_d="<div class='b1 position-absolute'><ol>";
-	
-	tab_d.forEach((num, index, arr) => {
-		$tab_d=$tab_d+arr[index];
-		
-	  });
-	  $tab_d=$tab_d+"</ol></div>";
-	  $("a.nav-brand.d").append($($tab_d));
-
-
-
-	  // EVENT LISTENER JS ///
-
-		$("a.nav-brand").each(function(){this.addEventListener(
-			"mouseover", (e) => {
-				e.preventDefault();
-			console.log("jai placé la souris sur");
-			let pf=$(this).children().last().get(0);
-			console.log(pf);
-			if(getComputedStyle(pf).display == "none"){
-					
-					pf.style.display = "block";
-					console.log("ok");
-			}
-			
-			
-			}
-		)
-
-
-
-
-		}
-	);
-
-
-	$("a.nav-brand").each(function(){this.addEventListener(
-		"mouseout", (e) => {
-			e.preventDefault();
-		console.log("jai enlevé la souris de l'élément");
-		let pf=$(this).children().last().get(0);
-		console.log(pf);
-		if(getComputedStyle(pf).display != "none"){
-				
-				pf.style.display = "none";
-				console.log("ok");
-		}
-		
-		}
-	)
-
-	}
-);
 
 
 
@@ -227,7 +149,7 @@ Calendrier.prototype.view=function(){
 		var $content=$("div#page_ca table tbody");
 
 		var $ca_2025=new Calendrier($content,0,$startDay,$startDay,$tab);
-
+		
 		const date = new Date();
 		$ca_2025.update(date.getMonth());//avec janvier egal à l'index 0
 		tab_months=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -354,19 +276,132 @@ Calendrier.prototype.view=function(){
 
 		$("div#horaires button").each(function(){this.addEventListener("click",(e)=>{
 			e.preventDefault();
-			console.log("ready");
-			var xmlhttp = new XMLHttpRequest();
-				  xmlhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-					  this.html("Occupé");
+			$butt_c=this;
+			this.innerHTML="Occupé";
+			var columnData = [];
+			table=$("div#horaires table").get(0);
+			console.log(table.rows);
+			var columnIndex=0;
+			var rowIndex=0;
+			var c=0;
+            for (var i = 1, row; row = table.rows[i]; i++) {
+				var c=0;
+				Array.from(row.cells).forEach(cell => {
+					
+					if(c!=0){
+						$elt_butt=cell.children[0].children[0];
+						if($elt_butt==$butt_c){
+							console.log("trouve col:"+c +" row:" + i);
+							columnIndex=c;
+							rowIndex=i;
+						}
+						
 					}
-				  };
-				  xmlhttp.open("POST", "ajax_info.php");
-				  xmlhttp.send("data=" + encodeURIComponent(data));
-
-		})});
-		
+					
+					c++;
+				});
+                
+            }
+			
+			columnData.push(table.rows[0].cells[columnIndex].innerText);
+			var content_t=columnData[0].substring(0,3)+table.rows[rowIndex].cells[0].innerText;
+			console.log(content_t);
+			$.ajax({
+				url: 'ajax_info.php',
+				type: 'POST',
+				data: { content: content_t },
+				success: function(response) {
+					console.log('File written successfully:', response);
+				},
+				error: function(xhr, status, error) {
+					console.error('Error writing file:', error);
+				}
+			});
+		})
+	
+	});
+	
+	
 	}
+
+	var tab_c=["<li><a class='nav-link' href='prevoir_rdv.php'>Prendre un rendez-vous téléphonique</a></li>","<li><a class='nav-link' href='contact.php'>Contact</a></li>"];
+	var $tab_c="<div class='b1 position-absolute'><ol>";
+	
+	tab_c.forEach((num, index, arr) => {
+		$tab_c=$tab_c+arr[index];
+		
+	  });
+	  $tab_c=$tab_c+"</ol></div>";
+	  $("a.c.nav-brand").append($($tab_c));
+	  
+
+	  /// TAB B ///
+	  var tab_b=["<li><a class='nav-link' href='type_coiffure.php'>Nos Types de coiffure</a></li>","<li><a class='nav-link' href='tarifs.php'>Nos Tarifs</a></li>"];
+	var $tab_b="<div class='b1 position-absolute'><ol>";
+	
+	tab_b.forEach((num, index, arr) => {
+		$tab_b=$tab_b+arr[index];
+		
+	  });
+	  $tab_b=$tab_b+"</ol></div>";
+	  $("a.b.nav-brand").append($($tab_b));
+	  
+
+	  /// TAB C ///
+	  var tab_d=["<li><a class='nav-link' href='inscrire.php'>S'inscrire</a></li>","<li><a class='nav-link' href='connecter.php'>Se connecter</a></li>","<li><a class='nav-link' href='deconnecter.php'>Se déconnecter</a></li>"];
+	var $tab_d="<div class='b1 position-absolute'><ol>";
+	
+	tab_d.forEach((num, index, arr) => {
+		$tab_d=$tab_d+arr[index];
+		
+	  });
+	  $tab_d=$tab_d+"</ol></div>";
+	  $("a.d.nav-brand").append($($tab_d));
+
+	 
+
+	  // EVENT LISTENER JS ///
+
+		$("a.nav-brand").each(function(){this.addEventListener(
+			"mouseover", (e) => {
+				e.preventDefault();
+			console.log("jai placé la souris sur");
+			let pf=$(this).children().last().get(0);
+			console.log(pf);
+			if(getComputedStyle(pf).display == "none"){
+					
+					pf.style.display = "block";
+					console.log("ok");
+			}
+			
+			
+			}
+		)
+
+
+
+
+		}
+	);
+
+
+	$("a.nav-brand").each(function(){this.addEventListener(
+		"mouseout", (e) => {
+			e.preventDefault();
+		console.log("jai enlevé la souris de l'élément");
+		let pf=$(this).children().last().get(0);
+		console.log(pf);
+		if(getComputedStyle(pf).display != "none"){
+				
+				pf.style.display = "none";
+				console.log("ok");
+		}
+		
+		}
+	)
+
+	}
+);
 		//var req = new XMLHttpRequest(); 
     	//req.onload = function() {
     //		console.log(this.responseText); 
